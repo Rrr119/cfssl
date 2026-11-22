@@ -70,6 +70,9 @@ type Config struct {
 	DBConfigFile      string
 	CRLExpiration     time.Duration
 	Disable           string
+	CSRDir            string
+	OutDir            string
+	CRLOutFile        string
 }
 
 // registerFlags defines all cfssl command flags and associates their values with variables.
@@ -132,6 +135,9 @@ func registerFlags(c *Config, f *flag.FlagSet) {
 	f.DurationVar(&c.CRLExpiration, "expiry", 7*helpers.OneDay, "time from now after which the CRL will expire (default: one week)")
 	f.IntVar(&log.Level, "loglevel", log.LevelInfo, "Log level (0 = DEBUG, 5 = FATAL)")
 	f.StringVar(&c.Disable, "disable", "", "endpoints to disable")
+	f.StringVar(&c.CSRDir, "csr-dir", "", "directory of PEM encoded CSR files for batch signing")
+	f.StringVar(&c.OutDir, "out-dir", "", "directory to write batch signed certificates")
+	f.StringVar(&c.CRLOutFile, "crl-out", "", "write a refreshed CRL to this file after revocation")
 }
 
 // RootFromConfig returns a universal signer Root structure that can

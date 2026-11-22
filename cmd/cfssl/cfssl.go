@@ -27,6 +27,7 @@ import (
 	"os"
 
 	"github.com/cloudflare/cfssl/cli"
+	"github.com/cloudflare/cfssl/cli/batchsign"
 	"github.com/cloudflare/cfssl/cli/bundle"
 	"github.com/cloudflare/cfssl/cli/certinfo"
 	"github.com/cloudflare/cfssl/cli/crl"
@@ -58,6 +59,7 @@ func main() {
 	flag.Usage = nil // this is set to nil for testability
 	// Register commands.
 	cmds := map[string]*cli.Command{
+		"batchsign":      batchsign.Command,
 		"bundle":         bundle.Command,
 		"certinfo":       certinfo.Command,
 		"crl":            crl.Command,
